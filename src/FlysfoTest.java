@@ -5,24 +5,45 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.ClickAction;
-import org.junit.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 
 
 public class FlysfoTest {
 
-	public static void main(String[] args) {
+public static WebDriverWait wait;
+public static WebDriver driver;
+
+@BeforeClass
+public static void setUp() 
+{
+	// open the firefox search engine
+ 	WebDriver driver = new FirefoxDriver();
+ 	
+ 	// maximize the firefox window
+ 	driver.manage().window().maximize();    
+ 	driver.get("http://flysfo.com/jobs");
+}
+
+@AfterClass
+public static void tearDown() 
+{
+driver.quit();
+}
+
+	//public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		// open the firefox search engine
-	 	WebDriver driver = new FirefoxDriver();
-	 	
-	 	// maximize the firefox window
-	 	driver.manage().window().maximize();
-	 	
+		
+	
+	 	@Test
 	 	// open the flysfo career website
-	 	driver.get("http://flysfo.com/jobs");
-	 	
+
+	 	public static void main(String[] args){
 	 	// finding the SFO logo
 	 	WebElement sfoLogo = driver.findElement(By.id("logo"));
 	 	Assert.assertNotNull("logo is not found", sfoLogo);
@@ -74,12 +95,6 @@ public class FlysfoTest {
 	 	WebElement rl = rgl.findElement(By.id("rl"));
 	 	Assert.assertNotNull("******** NOT FOUND **********", rl);
 	 	
-	 	
-	 	// close the web page
-	 	driver.close();
-	 	
-	 	//Testing 1
+	 	}
 	 	
 	}
-
-}
