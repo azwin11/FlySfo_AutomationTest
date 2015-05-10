@@ -6,31 +6,34 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
 
 
-public class FlysfoTest {
+
+public class TestClass {
 
 public static WebDriverWait wait;
 public static WebDriver driver;
 
-@BeforeClass
-public static void setUp() 
+@Before
+public void setUp() 
 {
 	// open the firefox search engine
  	WebDriver driver = new FirefoxDriver();
  	
  	// maximize the firefox window
- 	driver.manage().window().maximize();    
+ 	driver.manage().window().maximize();  
  	driver.get("http://flysfo.com/jobs");
+ 	
 }
 
-@AfterClass
-public static void tearDown() 
+@After
+public void tearDown() 
 {
 driver.quit();
 }
@@ -43,17 +46,29 @@ driver.quit();
 	 	@Test
 	 	// open the flysfo career website
 
-	 	public static void main(String[] args){
+	 	public void testLogo() throws InterruptedException{
 	 	// finding the SFO logo
+	 	wait();
 	 	WebElement sfoLogo = driver.findElement(By.id("logo"));
 	 	Assert.assertNotNull("logo is not found", sfoLogo);
+	 	}
 	 	
+	 	@Test
+	 	
+	 	public void testFlightinfo(){
 	 	// finding the first top menu 'flight info'
 	 	WebElement navBox = driver.findElement(By.id("nav"));
 	 	WebElement flightInfo = navBox.findElement(By.linkText("Flight Info"));
 	 	
 	 	Assert.assertNotNull("Flight Info is not found", flightInfo);
+	 	}
 	 	
+	 	
+	 	@Test
+	 	public void testhoverColor(){
+	 	
+	 	WebElement navBox = driver.findElement(By.id("nav"));
+		WebElement flightInfo = navBox.findElement(By.linkText("Flight Info"));
 	 	//hover on the menu
 	 	Actions action = new Actions(driver);
 	 	action.moveToElement(flightInfo).perform();
@@ -69,8 +84,13 @@ driver.quit();
 	 	// checking the color of 'flight info'
 	 	Assert.assertEquals("rgba(0, 92, 124, 1)", flightInfo.getCssValue("color"));
 	 	
+	 	}
 	 	
+	 	@Test
 	 	//find the element "Flight Status" sub-menu
+	 	
+	 	public void testFlightStatus(){
+	 	Actions action = new Actions(driver);
 	 	WebElement flightStatusSubmenu = driver.findElement(By.xpath("//nav[@id='nav']/ul/li[1]/ul/li[1]/a"));
 	 	action.moveToElement(flightStatusSubmenu).perform();
 	 	
@@ -96,5 +116,4 @@ driver.quit();
 	 	Assert.assertNotNull("******** NOT FOUND **********", rl);
 	 	
 	 	}
-	 	
 	}
