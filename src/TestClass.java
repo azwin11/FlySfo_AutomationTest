@@ -1,60 +1,45 @@
-
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 
 
 public class TestClass {
 
 public static WebDriverWait wait;
-public static WebDriver driver;
+public static WebDriver driver = new FirefoxDriver();
 
-@Before
-public void setUp() 
-{
-	// open the firefox search engine
- 	WebDriver driver = new FirefoxDriver();
- 	
- 	// maximize the firefox window
- 	driver.manage().window().maximize();  
- 	driver.get("http://flysfo.com/jobs");
- 	
-}
 
-@After
-public void tearDown() 
-{
-driver.quit();
-}
+		@BeforeClass
+		public static void setUp() 
+		{
+		 	// maximize the firefox window
+		 	driver.manage().window().maximize();  
+		 	driver.get("http://flysfo.com/jobs");
+		 	
+		}
 
-	//public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
+		@AfterClass
+		public static void tearDown() 
+		{
+		driver.quit();
+		}
+
 	
 	 	@Test
-	 	// open the flysfo career website
-
-	 	public void testLogo() throws InterruptedException{
+	 	public void testLogo(){
 	 	// finding the SFO logo
-	 	wait();
 	 	WebElement sfoLogo = driver.findElement(By.id("logo"));
-	 	Assert.assertNotNull("logo is not found", sfoLogo);
+	 	Assert.assertNotNull("NotFound", sfoLogo);
 	 	}
 	 	
 	 	@Test
-	 	
 	 	public void testFlightinfo(){
 	 	// finding the first top menu 'flight info'
 	 	WebElement navBox = driver.findElement(By.id("nav"));
@@ -66,7 +51,6 @@ driver.quit();
 	 	
 	 	@Test
 	 	public void testhoverColor(){
-	 	
 	 	WebElement navBox = driver.findElement(By.id("nav"));
 		WebElement flightInfo = navBox.findElement(By.linkText("Flight Info"));
 	 	//hover on the menu
@@ -87,8 +71,6 @@ driver.quit();
 	 	}
 	 	
 	 	@Test
-	 	//find the element "Flight Status" sub-menu
-	 	
 	 	public void testFlightStatus(){
 	 	Actions action = new Actions(driver);
 	 	WebElement flightStatusSubmenu = driver.findElement(By.xpath("//nav[@id='nav']/ul/li[1]/ul/li[1]/a"));
@@ -114,6 +96,8 @@ driver.quit();
 	 	WebElement rgl = searchGrid.findElement(By.id("rgl"));
 	 	WebElement rl = rgl.findElement(By.id("rl"));
 	 	Assert.assertNotNull("******** NOT FOUND **********", rl);
-	 	
 	 	}
+	 	
+	 	
 	}
+
