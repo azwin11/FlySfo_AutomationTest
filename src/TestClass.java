@@ -69,10 +69,15 @@ public static WebDriver driver = new FirefoxDriver();
 	 	Assert.assertEquals("rgba(0, 92, 124, 1)", flightInfo.getCssValue("color"));
 	 	
 	 	}
+	 
 	 	
 	 	@Test
 	 	public void testFlightStatus(){
-	 	Actions action = new Actions(driver);
+	 	WebElement navBox = driver.findElement(By.id("nav"));
+		WebElement flightInfo = navBox.findElement(By.linkText("Flight Info"));
+		 	//hover on the menu
+		Actions action = new Actions(driver);
+		action.moveToElement(flightInfo).perform();
 	 	WebElement flightStatusSubmenu = driver.findElement(By.xpath("//nav[@id='nav']/ul/li[1]/ul/li[1]/a"));
 	 	action.moveToElement(flightStatusSubmenu).perform();
 	 	
@@ -87,15 +92,21 @@ public static WebDriver driver = new FirefoxDriver();
 	 	//click the "Flight Status sub-menu
 	 	flightStatusSubmenu.click();
 	 	
+	 	
 	 	// find the "Departure" and "Arrival" switch button and click
 	 	//WebElement depArriButton = flightStatusSubmenu.findElement(By.xpath("//div[@id='search_grid']/ul/li[1]/a"));
 	 	//action.moveToElement(depArriButton).perform();
 	 	//depArriButton.click();
 	 	
 	 	WebElement searchGrid = driver.findElement(By.id("search_grid"));
-	 	WebElement rgl = searchGrid.findElement(By.id("rgl"));
-	 	WebElement rl = rgl.findElement(By.id("rl"));
+	 	WebElement rgl = searchGrid.findElement(By.id("rg1"));
+	 	WebElement rl = rgl.findElement(By.id("r1"));
 	 	Assert.assertNotNull("******** NOT FOUND **********", rl);
+	 	}
+	 	
+	 	@Test
+	 	public void myTest(){
+	 		testFlightStatus();
 	 	}
 	 	
 	 	
